@@ -8,7 +8,7 @@ import { Link } from "react-router-native";
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: theme.colors.textPrimay,
+    backgroundColor: theme.colors.textPrimary,
   },
   navBar: {
     display: "flex",
@@ -36,7 +36,7 @@ export const AppBar = () => {
           </Text>
         </Pressable>
         <Link to="/login">
-          <Text style={styles.navItemB}>Sign In</Text>
+          <Text style={styles.navItemB}>Sign in</Text>
         </Link>
       </View>
       </ScrollView>
