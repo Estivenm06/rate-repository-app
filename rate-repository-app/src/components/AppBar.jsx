@@ -29,16 +29,16 @@ export const AppBar = () => {
   return (
     <View style={styles.container}>
       <ScrollView horizontal>
-      <View style={styles.navBar}>
-        <Pressable>
-          <Text style={styles.navItemA} fontSize={"subheading"}>
-            Repositories
-          </Text>
-        </Pressable>
-        <Link to="/login">
-          <Text style={styles.navItemB}>Sign in</Text>
-        </Link>
-      </View>
+        <View style={styles.navBar}>
+          <Pressable>
+            <Text style={styles.navItemA} fontSize={"subheading"}>
+              Repositories
+            </Text>
+          </Pressable>
+          <Link to="/login">
+            <Text style={styles.navItemB}>Sign in</Text>
+          </Link>
+        </View>
       </ScrollView>
     </View>
   );

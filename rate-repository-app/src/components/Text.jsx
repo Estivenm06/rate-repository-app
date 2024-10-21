@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { Text as NativeText, StyleSheet } from "react-native";
-import {theme} from "../themes";
+import { theme } from "../themes";
 
 const styles = StyleSheet.create({
   text: {
@@ -23,7 +24,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// eslint-disable-next-line react/prop-types
 const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
   const textStyle = [
     styles.text,

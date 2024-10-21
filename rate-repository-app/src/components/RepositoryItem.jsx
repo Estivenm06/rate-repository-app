@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// eslint-disable-next-line react/prop-types
 const RepositoryItemTop = ({
   fullname,
   description,
@@ -50,7 +49,6 @@ const RepositoryItemTop = ({
     <>
       <View style={styles.top}>
         <Image style={styles.author} source={{ uri: `${ownerAvatarUrl}` }} />
-
         <View style={styles.texts}>
           <View style={styles.name}>
             <Text fontWeight={"bold"} fontSize={"subheading"}>
@@ -69,7 +67,6 @@ const RepositoryItemTop = ({
   );
 };
 
-// eslint-disable-next-line react/prop-types
 const RepositoryItemBottom = ({
   stargazersCount,
   forksCount,
