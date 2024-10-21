@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     display: "flex",
     backgroundColor: "white",
     padding: "1em",
-    gap: '20px'
+    gap: "20px",
   },
   top: {
     flexDirection: "row",
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     borderRadius: "0.5em",
   },
   texts: {
-    paddingLeft: '1em',
+    paddingLeft: "1em",
     flexDirection: "column",
     flexGrow: 0,
     flexShrink: 1,
