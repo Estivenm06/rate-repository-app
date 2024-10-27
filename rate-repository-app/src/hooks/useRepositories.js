@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
-import { GET_REPOSITORIES } from "./graphql/queries";
+import { GET_REPOSITORIES } from "../graphql/queries";
 
 export const useRepositories = () => {
   const [repositories, setRepositories] = useState();

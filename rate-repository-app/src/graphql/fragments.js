@@ -24,3 +24,10 @@ export const CORE_NODE_REPOSITORIES = gql`
     }
   }
 `;
+
+export const Authentication = gql`
+  fragment Authentication_Mutation on AuthenticatePayload {
+    accessToken
+    expiresAt
+  }
+`;

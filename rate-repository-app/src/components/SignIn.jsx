@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import Text from "./Text";
-import { View, Pressable, TextInput, StyleSheet} from "react-native";
+import { View, Pressable, TextInput, StyleSheet } from "react-native";
 import { useFormik } from "formik";
 import { theme } from "../themes";
 import * as yup from "yup";
+import { useSignIn } from "../hooks/useSign";
 
 const initialValues = {
   username: "",
@@ -42,7 +43,20 @@ const validationSchema = yup.object().shape({
   password: yup.string().required("Password is required"),
 });
 
-export const SignIn = ({ onSubmit }) => {
+export const SignIn = () => {
+  const [signIn] = useSignIn();
+
+  const onSubmit = async (values) => {
+    const { username, password } = values;
+
+    try {
+      const data = await signIn({ username, password });
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const formik = useFormik({
     initialValues,
     validationSchema,

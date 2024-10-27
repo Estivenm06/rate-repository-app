@@ -39,7 +39,6 @@ export const resolvers = {
       } = await argsSchema.validate(args, {
         stripUnknown: true,
       });
-
       const user = await User.query().findOne({ username });
 
       if (!user) {
