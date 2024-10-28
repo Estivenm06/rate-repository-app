@@ -9,3 +9,12 @@ export const GET_REPOSITORIES = gql`
     }
   }
 `;
+
+export const CHECK_USER = gql`
+  query {
+    me {
+      id
+      username
+    }
+  }
+`;
