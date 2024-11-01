@@ -124,7 +124,7 @@ const RepositoryItemBottom = ({
 
 export const RepositoryItem = (item) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="repositoryItem">
       <RepositoryItemTop
         fullname={item.item.fullName}
         description={item.item.description}
