@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+import { View } from "react-native-web";
 import React from "react";
 import {
   render,
@@ -8,6 +9,14 @@ import {
 } from "@testing-library/react-native";
 import { RepositoryListContainer } from "../components/RepositoryList";
 import { SignIn } from "../components/SignIn";
+
+const RepositoryItem = ({repositories}) => {
+  return (
+    <View testID="repositoryItem">
+      <RepositoryListContainer repositories={repositories}/>
+    </View>
+  )
+}
 
 describe("RepositoryList", () => {
   describe("RepositoryListContainer", () => {
@@ -55,7 +64,7 @@ describe("RepositoryList", () => {
         ],
       };
 
-      render(<RepositoryListContainer repositories={repositories} />);
+      render(<RepositoryItem repositories={repositories}/>);
       screen.debug();
 
       const repositoryItem = screen.getAllByTestId("repositoryItem");

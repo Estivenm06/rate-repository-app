@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
 import { View, Text, Pressable, TextInput } from "react-native";
 import {fireEvent, render, screen} from '@testing-library/react-native'
 import React, {useState} from "react";

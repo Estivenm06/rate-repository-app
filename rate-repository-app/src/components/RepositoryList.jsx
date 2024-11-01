@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View, Pressable } from "react-native";
 import { RepositoryItem } from "./RepositoryItem";
-import { useRepositories } from "../hooks/useRepositories";
+import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
   separator: {
@@ -12,6 +13,8 @@ const styles = StyleSheet.create({
 const itemSeparator = () => <View style={styles.separator} />;
 
 export const RepositoryListContainer = ({ repositories }) => {
+  const navigate = useNavigate()
+
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
     : [];
@@ -20,15 +23,18 @@ export const RepositoryListContainer = ({ repositories }) => {
     <FlatList
       data={repositoryNodes}
       ItemSeparatorComponent={itemSeparator}
-      renderItem={({ item }) => (
-        <RepositoryItem item={item} keyExtractor={(item) => item.id} />
-      )}
+      renderItem={({ item }) => {
+        return(
+          <Pressable onPress={() => navigate(`/${item.id}`)}>
+            <RepositoryItem item={item} keyExtractor={(item) => item.id} />
+          </Pressable>
+        )
+      }
+      }
     />
   );
 };
 
-export const RepositoryList = () => {
-  const { repositories } = useRepositories();
-
+export const RepositoryList = ({repositories}) => {
   return <RepositoryListContainer repositories={repositories} />;
 };

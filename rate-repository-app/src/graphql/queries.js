@@ -18,3 +18,18 @@ export const CHECK_USER = gql`
     }
   }
 `;
+
+export const GET_REPOSITORY = gql`
+  query Query($repositoryId: ID!){
+  repository(id: $repositoryId){
+  id
+  fullName
+  ownerAvatarUrl
+  ownerName
+  ratingAverage
+  reviewCount
+  language
+  url
+  }
+  }
+`

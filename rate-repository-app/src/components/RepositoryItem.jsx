@@ -122,20 +122,20 @@ const RepositoryItemBottom = ({
   );
 };
 
-export const RepositoryItem = (item) => {
+export const RepositoryItem = ({item}) => {
   return (
     <View style={styles.container} testID="repositoryItem">
       <RepositoryItemTop
-        fullname={item.item.fullName}
-        description={item.item.description}
-        language={item.item.language}
-        ownerAvatarUrl={item.item.ownerAvatarUrl}
+        fullname={item.fullName}
+        description={item.description}
+        language={item.language}
+        ownerAvatarUrl={item.ownerAvatarUrl}
       />
       <RepositoryItemBottom
-        stargazersCount={item.item.stargazersCount}
-        forksCount={item.item.forksCount}
-        reviewCount={item.item.reviewCount}
-        ratingAverage={item.item.ratingAverage}
+        stargazersCount={item.stargazersCount}
+        forksCount={item.forksCount}
+        reviewCount={item.reviewCount}
+        ratingAverage={item.ratingAverage}
       />
     </View>
   );
