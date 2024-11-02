@@ -50,7 +50,7 @@ const RepositoryItemTop = ({
       <View style={styles.top}>
         <Image style={styles.author} source={{ uri: `${ownerAvatarUrl}` }} />
         <View style={styles.texts}>
-          <View style={styles.name}>
+          <View>
             <Text fontWeight={"bold"} fontSize={"subheading"}>
               {fullname}
             </Text>
@@ -123,6 +123,10 @@ const RepositoryItemBottom = ({
 };
 
 export const RepositoryItem = ({item}) => {
+  if(!item){
+    return null
+  }
+  
   return (
     <View style={styles.container} testID="repositoryItem">
       <RepositoryItemTop

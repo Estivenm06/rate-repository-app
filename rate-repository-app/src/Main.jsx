@@ -9,7 +9,7 @@ import { useSignIn } from "./hooks/useSign";
 import { useNavigate } from "react-router-native";
 import { AuthStorage } from "./utils/authStorage";
 import { useApolloClient } from "@apollo/client";
-import { RepositorySingle } from "./components/RepositorySingle";
+import { SingleRepository } from "./components/RepositorySingle";
 import { useRepositories } from "./hooks/useRepositories";
 
 const styles = StyleSheet.create({
@@ -52,7 +52,7 @@ const Main = () => {
           />
           <Route
             path="/:id"
-            element={<RepositorySingle repositories={repositories} />}
+            element={<SingleRepository />}
           />
           <Route path="/login" element={<SignIn onSubmit={onSubmit} />} />
           <Route path="*" element={<Navigate to={"/"} replace />} />

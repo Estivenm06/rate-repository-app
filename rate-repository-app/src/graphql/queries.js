@@ -20,16 +20,34 @@ export const CHECK_USER = gql`
 `;
 
 export const GET_REPOSITORY = gql`
-  query Query($repositoryId: ID!){
-  repository(id: $repositoryId){
-  id
-  fullName
-  ownerAvatarUrl
-  ownerName
-  ratingAverage
-  reviewCount
-  language
-  url
+  query Query($repositoryId: ID!) {
+    repository(id: $repositoryId) {
+      id
+      fullName
+      ownerAvatarUrl
+      ratingAverage
+      reviewCount
+      stargazersCount
+      forksCount
+      ownerName
+      language
+      url
+      createdAt
+      reviews {
+        edges {
+          node {
+            id
+            createdAt
+            rating
+            text
+            user {
+              id
+              username
+            }
+            userId
+          }
+        }
+      }
+    }
   }
-  }
-`
+`;
