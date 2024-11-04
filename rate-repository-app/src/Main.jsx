@@ -5,12 +5,10 @@ import { AppBar } from "./components/AppBar";
 import { Route, Routes, Navigate } from "react-router-native";
 import { theme } from "./themes";
 import { SignIn } from "./components/SignIn";
-import { useSignIn } from "./hooks/useSign";
-import { useNavigate } from "react-router-native";
-import { AuthStorage } from "./utils/authStorage";
-import { useApolloClient } from "@apollo/client";
-import { SingleRepository } from "./components/RepositorySingle";
-import { useRepositories } from "./hooks/useRepositories";
+import { SingleRepository } from "./components/SingleRepository";
+import { Review } from "./components/Review";
+import { SignUp } from "./components/SignUp";
+import { PaperProvider } from "react-native-paper";
 
 const styles = StyleSheet.create({
   container: {
@@ -21,43 +19,24 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
-  const [signIn] = useSignIn();
-  const navigate = useNavigate();
-  const authStorage = new AuthStorage();
-  const apolloClient = useApolloClient();
-  const { repositories } = useRepositories();
-
-  const onSubmit = async (values) => {
-    const { username, password } = values;
-
-    try {
-      const data = await signIn({ username, password });
-      await authStorage.setAccessToken(data.authenticate.accessToken);
-      apolloClient.resetStore();
-      navigate("/");
-      return data;
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   return (
     <>
+    <PaperProvider>
       <View style={styles.container}>
         <AppBar />
         <Routes>
           <Route
             path="/"
-            element={<RepositoryList repositories={repositories} />}
+            element={<RepositoryList />}
           />
-          <Route
-            path="/:id"
-            element={<SingleRepository />}
-          />
-          <Route path="/login" element={<SignIn onSubmit={onSubmit} />} />
+          <Route path="/:id" element={<SingleRepository />} />
+          <Route path="/review" element={<Review />} />
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/signUp" element={<SignUp />} />
           <Route path="*" element={<Navigate to={"/"} replace />} />
         </Routes>
       </View>
+    </PaperProvider>
     </>
   );
 };

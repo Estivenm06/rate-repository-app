@@ -2,7 +2,7 @@
 import { RepositoryItem } from "./RepositoryItem";
 import { useParams } from "react-router-native";
 import React, { useEffect } from "react";
-import { View, StyleSheet, Pressable, FlatList } from "react-native-web";
+import { View, StyleSheet, Pressable, FlatList } from "react-native";
 import Text from "./Text";
 import { theme } from "../themes";
 import * as Linking from "expo-linking";
@@ -104,6 +104,7 @@ export const SingleRepository = () => {
   const [repository, setRepository] = useState();
   const [review, setreview] = useState();
   const { data } = useQuery(GET_REPOSITORY, {
+    fetchPolicy: 'cache-and-network',
     variables: { repositoryId: id },
   });
 

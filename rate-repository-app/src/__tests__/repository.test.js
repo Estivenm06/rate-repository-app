@@ -103,14 +103,14 @@ describe("SignIn", () => {
       const usernameInput = screen.getByPlaceholderText("Username");
       const passwordInput = screen.getByPlaceholderText("Password");
       const submitButton = screen.getByText("Sign in");
-      fireEvent.changeText(usernameInput, "luigi");
+      fireEvent.changeText(usernameInput, "kalle");
       fireEvent.changeText(passwordInput, "password");
       fireEvent.press(submitButton);
 
       await waitFor(() => {
         expect(onSubmit).toHaveBeenCalledTimes(1);
         expect(onSubmit.mock.calls[0][0]).toEqual({
-          username: "luigi",
+          username: "kalle",
           password: "password",
         });
       });
