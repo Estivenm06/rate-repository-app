@@ -15,33 +15,33 @@ const style = StyleSheet.create({
   container: {
     display: "flex",
     backgroundColor: "white",
-    padding: "1em",
-    gap: "15px",
+    padding: 15,
+    gap: 10,
     marginTop: 10,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   body: {
     flexDirection: "column",
     flexShrink: 1,
-    gap: "5px"
+    gap: 2,
   },
   containerButton: {
     backgroundColor: "white",
+    paddingBottom: 20,
   },
   button: {
     backgroundColor: theme.colors.primary,
-    borderRadius: "0.2em",
-    padding: "0.5em",
-    marginBottom: "0.7em",
-    width: "80%",
-    margin: "auto",
+    borderRadius: 5,
+    padding: 15,
+    marginLeft: 20,
+    marginRight: 20,
   },
   roundShape: {
-    border: "2px solid",
-    color: theme.colors.primary,
-    borderRadius: "2em",
-    width: "3em",
-    height: "3em",
+    borderWidth: 3,
+    borderColor: theme.colors.primary,
+    borderRadius: 50,
+    height: 60,
+    width: 60,
   },
 });
 
@@ -54,8 +54,11 @@ const RepositoryInfo = ({ repository }) => {
           style={style.button}
           onPress={() => Linking.openURL(repository.url)}
         >
-          <Text style={{ color: "white", textAlign: "center" }}>
-            Open in Github
+          <Text
+            style={{ color: "white", textAlign: "center" }}
+            fontWeight={"bold"}
+          >
+            Open in GitHub
           </Text>
         </Pressable>
       </View>
@@ -63,13 +66,11 @@ const RepositoryInfo = ({ repository }) => {
   );
 };
 
-const ReviewItem = ({ review }) => {
-  if (!review) {
-    return null;
-  }
-
+export const ReviewItem = ({ review }) => {
   const Date = () => (
-    <Text color={'textSecondary'}>{format(parseISO(review.createdAt), "dd.MM.yyyy")}</Text>
+    <Text color={"textSecondary"}>
+      {format(parseISO(review.createdAt), "dd.MM.yyyy")}
+    </Text>
   );
 
   return (
@@ -86,7 +87,9 @@ const ReviewItem = ({ review }) => {
       </View>
       <View style={style.body}>
         <View>
-          <Text fontWeight={"bold"} fontSize={'subheading'}>{review.user.username}</Text>
+          <Text fontWeight={"bold"} fontSize={"subheading"}>
+            {review.user.username}
+          </Text>
         </View>
         <View>
           <Date />
@@ -104,7 +107,7 @@ export const SingleRepository = () => {
   const [repository, setRepository] = useState();
   const [review, setreview] = useState();
   const { data } = useQuery(GET_REPOSITORY, {
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: "cache-and-network",
     variables: { repositoryId: id },
   });
 

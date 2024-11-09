@@ -11,25 +11,25 @@ const style = StyleSheet.create({
   container: {
     display: "flex",
     backgroundColor: "white",
-    padding: "1em",
-    gap: "0.5em",
+    padding: 20,
+    gap: 10,
   },
   input: {
-    padding: "0.5em",
+    padding: 10,
     borderWidth: 1,
     borderColor: "gray",
-    borderRadius: "0.2em",
+    borderRadius: 5,
   },
   inputError: {
-    padding: "0.5em",
+    padding: 10,
     borderWidth: 1,
     borderColor: theme.colors.errorColor,
-    borderRadius: "0.2em",
+    borderRadius: 5,
   },
   button: {
     backgroundColor: theme.colors.primary,
-    padding: "0.5em",
-    borderRadius: "0.2em",
+    padding: 15,
+    borderRadius: 5,
   },
 });
 

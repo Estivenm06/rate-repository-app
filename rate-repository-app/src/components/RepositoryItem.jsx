@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     backgroundColor: "white",
-    padding: "1em",
-    gap: "20px",
+    gap: 20,
+    padding: 15
   },
   top: {
     flexDirection: "row",
@@ -22,20 +22,19 @@ const styles = StyleSheet.create({
   author: {
     width: 50,
     height: 50,
-    borderRadius: "0.5em",
+    borderRadius: 5,
   },
   texts: {
-    paddingLeft: "1em",
+    paddingLeft: 20,
     flexDirection: "column",
-    flexGrow: 0,
     flexShrink: 1,
-    gap: "5px",
+    gap: 5,
   },
   textLanguage: {
     backgroundColor: theme.colors.primary,
-    borderRadius: "0.2em",
-    padding: "0.5em",
-    width: "fit-content",
+    borderRadius: 5,
+    padding: 5,
+    alignSelf: 'flex-start'
   },
 });
 

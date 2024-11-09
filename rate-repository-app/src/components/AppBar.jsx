@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { ScrollView, View, StyleSheet, Pressable } from "react-native";
 import Text from "./Text";
@@ -5,9 +6,8 @@ import Constants from "expo-constants";
 import { theme } from "../themes";
 import { Link, useNavigate } from "react-router-native";
 import { AuthStorage } from "../utils/authStorage";
+import { useApolloClient, useQuery } from "@apollo/client";
 import { CHECK_USER } from "../graphql/queries";
-import { useQuery } from "@apollo/client";
-import { useApolloClient } from "@apollo/client";
 
 const styles = StyleSheet.create({
   container: {
@@ -17,15 +17,17 @@ const styles = StyleSheet.create({
   navBar: {
     display: "flex",
     flexDirection: "row",
+    padding: 20,
   },
   navItemA: {
     color: "white",
-    padding: "1em",
+    padding: 5,
   },
   navItemB: {
     color: "white",
-    padding: "1em",
+    padding: 5,
     margin: "auto",
+    marginLeft: 10
   },
 });
 
@@ -43,25 +45,23 @@ const useLogout = () => {
 };
 
 export const AppBar = () => {
-  const [user, setUser] = useState(null);
   const [logout] = useLogout();
-  const { data, loading } = useQuery(CHECK_USER);
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const { data } = useQuery(CHECK_USER);
 
   useEffect(() => {
-    const checkUser = async () => {
-      if (data) {
-        setUser(data.me);
-      }
+    const checkUser = () => {
+      data ? setUser(data.me) : setUser(null);
     };
     checkUser();
-  }, [data, loading]);
+  }, [data]);
 
   return (
     <View style={styles.container}>
       <ScrollView horizontal>
         <View style={styles.navBar}>
-          <Pressable>
+          <Pressable onPress={() => navigate('/')}>
             <Text style={styles.navItemA} fontSize={"subheading"}>
               Repositories
             </Text>
@@ -71,17 +71,20 @@ export const AppBar = () => {
               <Pressable onPress={() => navigate("/review")}>
                 <Text style={styles.navItemB}>Create a review</Text>
               </Pressable>
+              <Pressable onPress={() => navigate('/myReviews')}>
+                <Text style={styles.navItemB}>My reviews</Text>
+              </Pressable>
               <Pressable onPress={() => logout()}>
-                <Text style={styles.navItemB}>Log out</Text>
+                <Text style={styles.navItemB}>Sign out</Text>
               </Pressable>
             </>
           ) : (
             <>
-              <Link to='/signUp'>
-                <Text style={styles.navItemB}>Sign Up</Text>
-              </Link>
               <Link to="/login">
                 <Text style={styles.navItemB}>Sign in</Text>
+              </Link>
+              <Link to="/signUp">
+                <Text style={styles.navItemB}>Sign up</Text>
               </Link>
             </>
           )}

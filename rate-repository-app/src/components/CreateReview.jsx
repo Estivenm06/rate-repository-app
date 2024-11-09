@@ -11,32 +11,32 @@ const initialValues = {
   ownerName: "",
   repositoryName: "",
   rating: "",
-  text: "",
+  review: "",
 };
 
 const styles = StyleSheet.create({
   container: {
     display: "flex",
     backgroundColor: "white",
-    padding: "1em",
-    gap: "0.5em",
+    padding: 20,
+    gap: 15,
   },
   input: {
-    padding: "0.5em",
+    padding: 10,
     borderWidth: 1,
     borderColor: "gray",
-    borderRadius: "0.2em",
+    borderRadius: 5,
   },
   inputError: {
-    padding: "0.5em",
+    padding: 10,
     borderWidth: 1,
     borderColor: theme.colors.errorColor,
-    borderRadius: "0.2em",
+    borderRadius: 5,
   },
   button: {
     backgroundColor: theme.colors.primary,
-    padding: "0.5em",
-    borderRadius: "0.2em",
+    padding: 15,
+    borderRadius: 5,
   },
 });
 
@@ -50,21 +50,21 @@ const validationSchema = yup.object().shape({
     .min(0)
     .max(100)
     .required("Rating is required"),
-  text: yup.string().optional(),
+  review: yup.string().optional(),
 });
 
-export const Review = () => {
+export const CreateReview = () => {
   const [createAnReview] = useCreateReview();
   const navigate = useNavigate();
   const onSubmit = async (values) => {
-    const { ownerName, repositoryName, rating, text } = values;
+    const { ownerName, repositoryName, rating, review } = values;
     const r = Number(rating);
     try {
       const { createReview } = await createAnReview({
         ownerName,
         repositoryName,
         rating: r,
-        text,
+        review,
       });
       navigate(`/${createReview.repositoryId}`);
       return createReview;
@@ -159,7 +159,7 @@ export const Review = () => {
       <>
         <TextInput
           style={styles.input}
-          value={formik.values.text}
+          value={formik.values.review}
           placeholder="Review"
           placeholderTextColor={"gray"}
           onChangeText={formik.handleChange("review")}

@@ -3,18 +3,41 @@ import { CORE_NODE_REPOSITORIES } from "./fragments";
 
 export const GET_REPOSITORIES = gql`
   ${CORE_NODE_REPOSITORIES}
-  query GetAll($orderBy: AllRepositoriesOrderBy!, $orderDirection: OrderDirection!){
-    repositories (orderBy: $orderBy, orderDirection: $orderDirection){
+  query GetAll(
+    $orderBy: AllRepositoriesOrderBy!
+    $orderDirection: OrderDirection!
+    $searchKeyword: String
+  ) {
+    repositories(
+      orderBy: $orderBy
+      orderDirection: $orderDirection
+      searchKeyword: $searchKeyword
+    ) {
       ...coreRepositories
     }
   }
 `;
 
 export const CHECK_USER = gql`
-  query {
+  query getCurrentUser($includeReviews: Boolean = false) {
     me {
       id
       username
+      reviews @include(if: $includeReviews) {
+        edges {
+          node {
+            id
+            createdAt
+            rating
+            text
+            user {
+              id
+              username
+            }
+            userId
+          }
+        }
+      }
     }
   }
 `;
@@ -24,6 +47,7 @@ export const GET_REPOSITORY = gql`
     repository(id: $repositoryId) {
       id
       fullName
+      description
       ownerAvatarUrl
       ratingAverage
       reviewCount
