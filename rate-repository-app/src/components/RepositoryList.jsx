@@ -17,10 +17,10 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   options: {
-    flexDirection:'row',
+    flexDirection: "row",
     padding: 10,
-    alignContent:'flex-start',
-  }
+    alignContent: "flex-start",
+  },
 });
 
 const itemSeparator = () => <View style={styles.separator} />;
@@ -58,6 +58,8 @@ export class RepositoryListContainer extends React.Component {
           );
         }}
         ItemSeparatorComponent={itemSeparator}
+        onEndReached={props.onEndReach}
+        onEndReachedThreshold={0.5}
       />
     );
   }
@@ -128,11 +130,16 @@ export const RepositoryList = () => {
   const [name, setName] = useState("Latest repositories");
   const [search, setSearch] = useState("");
   const [searchQueryDebounced] = useDebounce(search, 500);
-  const { repositories, refetchRepositories } = useRepositories(
+  const { repositories, refetchRepositories, fetchMore } = useRepositories({
+    first: 5,
     sorting,
-    searchQueryDebounced
-  );
+    searchQueryDebounced,
+  });
+
   const navigate = useNavigate();
+  const onEndReach = () => {
+    fetchMore();
+  };
   return (
     <RepositoryListContainer
       repositories={repositories}
@@ -143,6 +150,7 @@ export const RepositoryList = () => {
       search={search}
       setSearch={setSearch}
       navigate={navigate}
+      onEndReach={onEndReach}
     />
   );
 };

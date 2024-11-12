@@ -7,9 +7,8 @@ import Text from "./Text";
 import { theme } from "../themes";
 import * as Linking from "expo-linking";
 import { useState } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_REPOSITORY } from "../graphql/queries";
 import { format, parseISO } from "date-fns";
+import { useSingleRepository } from "../hooks/useSingleRepository";
 
 const style = StyleSheet.create({
   container: {
@@ -104,30 +103,29 @@ export const ReviewItem = ({ review }) => {
 
 export const SingleRepository = () => {
   const { id } = useParams();
-  const [repository, setRepository] = useState();
-  const [review, setreview] = useState();
-  const { data } = useQuery(GET_REPOSITORY, {
-    fetchPolicy: "cache-and-network",
-    variables: { repositoryId: id },
-  });
+  const [review, setReview] = useState();
+  const { repository, fetchMore } = useSingleRepository({ id, first: 4 });
 
   useEffect(() => {
-    if (data) {
-      setRepository(data.repository);
-      setreview(data.repository.reviews);
+    if (repository) {
+      setReview(repository?.reviews.edges);
     }
-  }, [data]);
+  }, [repository]);
 
-  const reviewSingle = review ? review.edges.map((edge) => edge.node) : [];
+  const endReached = () => {
+    fetchMore();
+  };
 
   return (
     <FlatList
-      data={reviewSingle}
-      renderItem={({ item }) => {
-        return <ReviewItem review={item} />;
-      }}
-      keyExtractor={({ id }) => id}
+      data={review}
+      renderItem={({ item }) => (
+        <ReviewItem review={item.node} key={(item) => item.node.id} />
+      )}
+      keyExtractor={({ node }) => node.id}
       ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
+      onEndReached={endReached}
+      onEndReachedThreshold={0.5}
     />
   );
 };
